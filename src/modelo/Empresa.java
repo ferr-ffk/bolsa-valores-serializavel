@@ -1,6 +1,7 @@
 package modelo;
 
 import services.EmpresaService;
+import util.Vetor;
 
 import java.io.*;
 import java.util.List;
@@ -24,7 +25,7 @@ public class Empresa implements Serializable {
 
 	private final TipoAcaoEmpresa tipoAcaoEmpresa;
 
-
+	private final Vetor<Empresa> empresasRelacionadas = new Vetor<>(25);
 
 	/**
 	 * Instancia uma nova empresa e logo registra ela no arquivo de texto.
@@ -59,6 +60,15 @@ public class Empresa implements Serializable {
 		return nome;
 	}
 
+	public void relacionarEmpresa(Empresa empresa) {
+		empresasRelacionadas.adicionar(empresa);
+	}
+
+	/**
+	 * Altera o caminho de destino dos arquivos .ser
+	 *
+	 * @param caminho A string do caminho novo absoluto ou relativo da máquina
+	 */
 	public static void setCaminhoArquivo(String caminho) {
 		EmpresaService.setCaminhoArquivo(caminho);
 	}

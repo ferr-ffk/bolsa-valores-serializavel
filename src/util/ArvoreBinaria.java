@@ -1,8 +1,6 @@
 package util;
 
-import java.io.Serializable;
-
-public class ArvoreBinaria<T> implements Serializable {
+public class ArvoreBinaria<T> {
 
 	/*
 	 * Criado por: profa. Divani Barbosa Gavinier Curriculo Lattes:
