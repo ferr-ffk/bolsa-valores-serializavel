@@ -11,23 +11,23 @@ public class InvestidorService {
 
     private static String INVESTIDORES_SER = LocaisArquivoTexto.INVESTIDORES_SER_PADRAO;
 
-    public static void criarInvestidor(Investidor investidor) {
-        ArrayList<Investidor> investidores = readInvestidores();
-
+    public static void criarInvestidor(Investidor investidor) throws Exception {
         try {
+            ArrayList<Investidor> investidores = readInvestidores();
+
             FileOutputStream fileOut = new FileOutputStream(INVESTIDORES_SER);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
 
             investidores.add(investidor);
 
             out.writeObject(investidores);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    public static ArrayList<Investidor> readInvestidores() {
-        ArrayList<Investidor> investidores = null;
+    public static ArrayList<Investidor> readInvestidores() throws Exception {
+        ArrayList<Investidor> investidores;
 
         try {
             FileInputStream fileIn = new FileInputStream(INVESTIDORES_SER);
@@ -37,10 +37,10 @@ public class InvestidorService {
 
             fileIn.close();
             in.close();
-        } catch (EOFException ef) {
+        } catch (FileNotFoundException e) {
+            throw new Exception("O arquivo " + INVESTIDORES_SER + " não pode ser encontrado!", e);
+        } catch (IOException | ClassNotFoundException ef) {
             investidores = new ArrayList<>();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
         return investidores;

@@ -2,8 +2,6 @@ package services;
 
 import constantes.LocaisArquivoTexto;
 import modelo.Empresa;
-import modelo.Investidor;
-import modelo.TipoAcaoEmpresa;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -13,10 +11,10 @@ public class EmpresaService {
 
     private static String EMPRESAS_SER = LocaisArquivoTexto.EMPRESAS_SER_PADRAO;
 
-    public static void criarEmpresa(Empresa empresa) {
-        ArrayList<Empresa> empresas = readEmpresas();
-
+    public static void criarEmpresa(Empresa empresa) throws Exception {
         try {
+            ArrayList<Empresa> empresas = readEmpresas();
+
             FileOutputStream fileOut = new FileOutputStream(EMPRESAS_SER);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
 
@@ -28,7 +26,7 @@ public class EmpresaService {
         }
     }
 
-    public static ArrayList<Empresa> readEmpresas() {
+    public static ArrayList<Empresa> readEmpresas() throws Exception {
         ArrayList<Empresa> empresasCadastradas = new ArrayList<>();
 
         try {
@@ -39,8 +37,10 @@ public class EmpresaService {
 
             fileIn.close();
             in.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            throw new Exception("O arquivo " + EMPRESAS_SER + " não pode ser encontrado!", e);
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
         return empresasCadastradas;

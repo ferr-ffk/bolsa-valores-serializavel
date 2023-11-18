@@ -97,7 +97,11 @@ public class Empresa implements Serializable {
 	}
 
 	private void registrarEmpresa(Empresa empresa) {
-		EmpresaService.criarEmpresa(empresa);
+		try {
+			EmpresaService.criarEmpresa(empresa);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public void comprarCotas(int cotas) {
@@ -111,7 +115,11 @@ public class Empresa implements Serializable {
 	 * Retorna todas as empresas registradas.
 	 */
 	public static List<Empresa> obterEmpresas() {
-		return EmpresaService.readEmpresas();
+		try {
+			return EmpresaService.readEmpresas();
+		} catch (Exception e) {
+			throw new RuntimeException("Não há nenhuma empresa cadastrada neste arquivo!", e);
+		}
 	}
 
 	/**

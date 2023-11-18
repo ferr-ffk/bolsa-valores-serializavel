@@ -2,9 +2,7 @@ package modelo;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Date;
 
-import constantes.LocaisArquivoTexto;
 import services.CorretoraService;
 import util.Pilha;
 
@@ -51,14 +49,17 @@ public class Corretora implements Serializable {
 	 * texto. Para total segurança, certifica que o investidor tem poder de compra e
 	 * depois adiciona em sua carteira de ações. Posteriormente subtrai da empresa
 	 * uma cota.
-	 * 
-	 * 
-	 * @param a A ação a ser comprada pelo investidor
-	 * @param i O investidor realizando o papel de comprador
-	 * @param emp A empresa a vender a cota
+	 *
+	 * @param acao A ação a ser comprada pelo investidor
+	 * @param investidor O investidor realizando o papel de comprador
+	 * @param empresa A empresa a vender a cota
 	 */
-	public void enviarOrdem(AbstratoAcao a, Investidor i, Empresa emp) {
-		CorretoraService.enviarOrdem(new Ordem(i, this, a, emp));
+	public void enviarOrdem(AbstratoAcao acao, Investidor investidor, Empresa empresa) {
+		try {
+			CorretoraService.enviarOrdem(new Ordem(investidor, this, acao, empresa));
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public void removerUltimaOrdem() {
@@ -67,7 +68,11 @@ public class Corretora implements Serializable {
 	}
 
 	public static ArrayList<Ordem> obterOrdens() {
-		return CorretoraService.readOrdens();
+		try {
+			return CorretoraService.readOrdens();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public Integer getCodigo() {

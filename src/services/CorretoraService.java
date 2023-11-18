@@ -5,19 +5,17 @@ import modelo.*;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class CorretoraService {
 
     private static String HISTORICO_ORDENS_SER = LocaisArquivoTexto.HISTORICO_ORDENS_SER_PADRAO;
 
-    public static void enviarOrdem(Ordem ordem) {
+    public static void enviarOrdem(Ordem ordem) throws Exception {
         ordem.getInvestidor().adicionarPapel(ordem.getAcao());
-        ArrayList<Ordem> ordens = readOrdens();
-
 
         try {
+            ArrayList<Ordem> ordens = readOrdens();
+
             FileOutputStream fileOut = new FileOutputStream(HISTORICO_ORDENS_SER);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
 
@@ -29,7 +27,7 @@ public class CorretoraService {
         }
     }
 
-    public static ArrayList<Ordem> readOrdens() {
+    public static ArrayList<Ordem> readOrdens() throws Exception {
         ArrayList<Ordem> ordens = new ArrayList<>();
 
         try {
@@ -40,8 +38,10 @@ public class CorretoraService {
 
             fileIn.close();
             in.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            throw new Exception("O sistema não pode encontrar o aquivo " + HISTORICO_ORDENS_SER, e);
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
         return ordens;

@@ -3,7 +3,6 @@ package modelo;
 import java.io.*;
 import java.util.List;
 
-import constantes.LocaisArquivoTexto;
 import services.InvestidorService;
 
 /**
@@ -12,7 +11,7 @@ import services.InvestidorService;
  * 
  * @author Fernando Freitas, Davi Gomes
  */
-public final class Investidor implements Serializable {
+public class Investidor implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -6793868738775707494l;
@@ -46,7 +45,11 @@ public final class Investidor implements Serializable {
 	 * @return A lista de todos os investidores cadastrados
 	 */
 	public static List<Investidor> obterInvestidores() {
-		return InvestidorService.readInvestidores();
+		try {
+			return InvestidorService.readInvestidores();
+		} catch (Exception e) {
+			throw new RuntimeException("Não nenhum investidor cadastrado neste arquivo!", e);
+		}
 	}
 
 	public static Investidor obterInvestidor(Integer id) {
@@ -54,7 +57,11 @@ public final class Investidor implements Serializable {
 	}
 
 	private void registrarInvestidor(Investidor investidor) {
-		InvestidorService.criarInvestidor(investidor);
+		try {
+			InvestidorService.criarInvestidor(investidor);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	private void atualizarInvestidor(Integer id, Investidor investidor) {
