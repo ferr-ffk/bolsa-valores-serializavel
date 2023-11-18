@@ -51,13 +51,13 @@ O sistema possui estrutura de arquivos simples para fácil uso. Apenas baixe o a
 Por padrão, o sistema irá armazenar os históricos de ordens e empresas cadastradas na pasta `/registros` do projeto em arquivos de texto serializável. É possível alterar para um caminho relativo da sua máquina:
 
 ```Java
-Corretora.setCaminhoArquivo("C:\\Program Files\\Notas\\Fernando\\HistoricoOrdens.ser");
+Corretora.setCaminhoArquivo("ordensEfetuadas/HistoricoOrdens.ser");
 ```
 
 E o equivalente para a classe Empresa:
 
 ```Java    	
-Empresa.setCaminhoArquivo("C:\\Program Files\\Notas\\Fernando\\Empresas.ser");
+Empresa.setCaminhoArquivo("arquivos/Empresas.ser");
 ```
 
 Lembrando que para cada subpasta deve utilizar ```\\```.
@@ -75,5 +75,5 @@ public static final String EMPRESAS_SER_PADRAO = "C:\\Program Files\\Notas\\Davi
 - [X] Implementação das entidades de modelo
 - [X] Implementação das classes de utilidades como Fila, Pilha e Árvore
 - [X] Armazenamento das ordens de compra e venda em arquivos ```.ser```
-- [ ] Geração de relatórios
+- [X] Geração de relatórios
 - [ ] Simulação de flutuação de valores de ações
