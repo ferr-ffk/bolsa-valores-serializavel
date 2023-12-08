@@ -113,12 +113,14 @@ public class Empresa implements Serializable {
 
 	/**
 	 * Retorna todas as empresas registradas.
+	 *
+	 * @return A lista de empresas, nulo se não houver nenhuma cadastrada
 	 */
 	public static List<Empresa> obterEmpresas() {
 		try {
 			return EmpresaService.readEmpresas();
 		} catch (Exception e) {
-			throw new RuntimeException("Não há nenhuma empresa cadastrada neste arquivo!", e);
+			return null;
 		}
 	}
 

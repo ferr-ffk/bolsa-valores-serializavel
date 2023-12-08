@@ -40,7 +40,7 @@ public class EmpresaService {
         } catch (FileNotFoundException e) {
             throw new Exception("O arquivo " + EMPRESAS_SER + " não pode ser encontrado!", e);
         } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+//            throw new RuntimeException(e);
         }
 
         return empresasCadastradas;

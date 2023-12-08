@@ -18,11 +18,12 @@ public class Corretora implements Serializable {
 
 	@Serial
 	private static final long serialVersionUID = -5802901772382038450L;
+
 	private String nome;
 
 	private Integer codigo;
 
-	private Pilha<Ordem> ordensEfetuadas = new Pilha<>();
+	private final Pilha<Ordem> ordensEfetuadas = new Pilha<>();
 
 	/**
 	 * Instancia uma nova corretora na bolsa de valores.
@@ -67,11 +68,16 @@ public class Corretora implements Serializable {
 		System.out.println(ultimaOrdem + " removida com sucesso");
 	}
 
+	/**
+	 * Retorna a lista de todas as ordens efetuadas cadastradas no arquivo
+	 *
+	 * @return A lista de ordens efetuadas, nulo se não for realizada nenhuma no momento
+	 */
 	public static ArrayList<Ordem> obterOrdens() {
 		try {
 			return CorretoraService.readOrdens();
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			return null;
 		}
 	}
 

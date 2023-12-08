@@ -28,7 +28,7 @@ public class CorretoraService {
     }
 
     public static ArrayList<Ordem> readOrdens() throws Exception {
-        ArrayList<Ordem> ordens = new ArrayList<>();
+        ArrayList<Ordem> ordens;
 
         try {
             FileInputStream fileIn = new FileInputStream(HISTORICO_ORDENS_SER);
@@ -38,10 +38,8 @@ public class CorretoraService {
 
             fileIn.close();
             in.close();
-        } catch (FileNotFoundException e) {
-            throw new Exception("O sistema não pode encontrar o aquivo " + HISTORICO_ORDENS_SER, e);
         } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            throw new Exception("O sistema não pode encontrar o aquivo " + HISTORICO_ORDENS_SER, e);
         }
 
         return ordens;
