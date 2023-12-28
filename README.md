@@ -60,15 +60,16 @@ E o equivalente para a classe Empresa:
 Empresa.setCaminhoArquivo("arquivos/Empresas.ser");
 ```
 
-Lembrando que para cada subpasta deve utilizar ```\\```.
 
-É possível também mudar os caminhos na classe ```LocaisArquivoTexto.java``` para mudança no projeto todo, apenas mude o valor das constantes lá:
+É possível também mudar os caminhos padrões pela classe ```LocaisArquivoTexto.java``` para mudança no projeto todo, apenas utilize o método ```setCaminhoArquivo()```:
 
 ```Java
-public static final String HISTORICO_ORDENS_SER_PADRAO = "C:\\Program Files\\Notas\\Davi\\Empresas.ser";
-	
-public static final String EMPRESAS_SER_PADRAO = "C:\\Program Files\\Notas\\Davi\\Empresas.ser";
+LocaisArquivoTexto.setCaminhoArquivoPadrao("C:\\Users\\fe_fr\\Documents");
+        
+LocaisArquivoTexto.setCaminhoArquivoPadrao("/registros");
 ```
+
+Lembrando que para cada subpasta deve utilizar ```\\```.
 
 ## 🏃‍♀️ O que será feito no projeto?
 
